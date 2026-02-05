@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RGB Studio · Selector RGB + HEX</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="#">
+        RGB Studio
+        <span class="badge text-bg-dark ms-2">Bootstrap</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#app">Aplicación</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">Acerca</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main id="app" class="container py-4">
+    <!-- Encabezado -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10">
+        <div class="p-4 p-md-5 rounded-4 bg-white border shadow-sm">
+          <h1 class="display-6 fw-semibold mb-2">Selector de Color RGB → HEX</h1>
+          <p class="text-muted mb-0">
+            Ajusta sliders, escribe valores RGB o usa el color picker. El resultado se refleja en el recuadro y en el código HEX.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid principal -->
+    <div class="row g-4 justify-content-center">
+      <!-- Columna izquierda: Preview + Códigos -->
+      <div class="col-12 col-lg-5">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-start justify-content-between mb-3">
+              <div>
+                <h2 class="h5 fw-semibold mb-1">Vista previa</h2>
+                <div class="text-muted small">Color resultante en tiempo real</div>
+              </div>
+              <span class="badge text-bg-secondary">Live</span>
+            </div>
+
+            <div id="colorPreview" class="color-preview rounded-4 border mb-4"></div>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="card border rounded-4">
+                  <div class="card-body py-3">
+                    <div class="text-muted small">RGB</div>
+                    <div class="fs-3 fw-semibold" id="rgbText">rgb(0, 0, 0)</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="card border rounded-4">
+                  <div class="card-body py-3">
+                    <div class="d-flex align-items-center justify-content-between gap-3">
+                      <div>
+                        <div class="text-muted small">HEX</div>
+                        <code class="fs-3 fw-semibold" id="hexText">#000000</code>
+                      </div>
+                      <div class="text-end">
+                        <button class="btn btn-outline-secondary btn-sm" id="copyBtn" type="button">
+                          Copiar
+                        </button>
+                        <div class="form-text" id="copyStatus" aria-live="polite"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: Picker + Inputs + Sliders -->
+      <div class="col-12 col-lg-5">
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4">
+            <h2 class="h5 fw-semibold mb-1">Controles</h2>
+            <div class="text-muted small mb-4">Elige un color o ajusta manualmente R, G y B (0–255)</div>
+
+            <!-- Card: Color Picker -->
+            <div class="card border rounded-4 mb-3">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                  <div>
+                    <div class="fw-semibold">Color Picker</div>
+                    <div class="text-muted small">Selecciona un color base</div>
+                  </div>
+
+                  <input
+                    type="color"
+                    class="form-control form-control-color"
+                    id="colorPicker"
+                    value="#000000"
+                    title="Selecciona un color"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Card: Inputs numéricos -->
+            <div class="card border rounded-4 mb-3">
+              <div class="card-body">
+                <div class="fw-semibold mb-2">RGB (decimal)</div>
+
+                <div class="row g-2">
+                  <div class="col-12 col-md-4">
+                    <label class="form-label" for="rInput">
+                      Rojo <span class="badge text-bg-danger ms-1">R</span>
+                    </label>
+                    <input type="number" class="form-control" id="rInput" min="0" max="255" step="1" value="0" />
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label class="form-label" for="gInput">
+                      Verde <span class="badge text-bg-success ms-1">G</span>
+                    </label>
+                    <input type="number" class="form-control" id="gInput" min="0" max="255" step="1" value="0" />
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label class="form-label" for="bInput">
+                      Azul <span class="badge text-bg-primary ms-1">B</span>
+                    </label>
+                    <input type="number" class="form-control" id="bInput" min="0" max="255" step="1" value="0" />
+                  </div>
+                </div>
+
+                <div class="form-text mt-2">
+                  Presiona <kbd>Enter</kbd> o sal del campo para aplicar (se ajusta automáticamente a 0–255).
+                </div>
+              </div>
+            </div>
+
+            <!-- Card: Sliders -->
+            <div class="card border rounded-4">
+              <div class="card-body">
+                <div class="fw-semibold mb-3">Sliders</div>
+
+                <div class="vstack gap-3">
+                  <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <label for="rRange" class="form-label m-0">
+                        Rojo <span class="badge text-bg-danger ms-1">R</span>
+                      </label>
+                      <span class="value-pill" id="rVal">0</span>
+                    </div>
+                    <input type="range" class="form-range" id="rRange" min="0" max="255" value="0" />
+                  </div>
+
+                  <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <label for="gRange" class="form-label m-0">
+                        Verde <span class="badge text-bg-success ms-1">G</span>
+                      </label>
+                      <span class="value-pill" id="gVal">0</span>
+                    </div>
+                    <input type="range" class="form-range" id="gRange" min="0" max="255" value="0" />
+                  </div>
+
+                  <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <label for="bRange" class="form-label m-0">
+                        Azul <span class="badge text-bg-primary ms-1">B</span>
+                      </label>
+                      <span class="value-pill" id="bVal">0</span>
+                    </div>
+                    <input type="range" class="form-range" id="bRange" min="0" max="255" value="0" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Card: About (opcional dentro del main) -->
+        <div id="about" class="card border-0 shadow-sm rounded-4 mt-4">
+          <div class="card-body p-4">
+            <h2 class="h6 fw-semibold mb-2">Acerca de</h2>
+            <p class="text-muted mb-0">
+              Mini-app para visualizar colores RGB y su equivalente en HEX. Sincroniza slider, inputs numéricos y color picker.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-top bg-white mt-4">
+    <div class="container py-3">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
+        <div class="text-muted small">
+          © <span id="year"></span> · RGB Studio
+        </div>
+        <div class="small">
+          <span class="text-muted">Programador:</span>
+          <span class="fw-semibold">Marco Lara</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+  <!-- JS propio -->
+  <script src="assets/js/app.js"></script>
+
+  <!-- JS mínimo solo para el año del footer -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+.color-preview {
+  width: 100%;
+  min-height: 180px;
+  background: rgb(0, 0, 0);
+}
+
+.value-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #fff;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+/* Extra opcional: look más moderno */
+.color-preview {
+  min-height: 220px;
+  background: rgb(0, 0, 0);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.card.rounded-4,
+.rounded-4 {
+  border-radius: 1rem !important;
+}
